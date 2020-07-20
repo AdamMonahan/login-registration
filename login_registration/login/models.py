@@ -6,6 +6,9 @@ EMAIL_MATCH = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 class UserManager(models.Manager):
 
+    def get_all_by_email(self):
+        return self.order_by('email')
+
     def register(self, form_data):
         my_hash = bcrypt.hashpw(form_data['password'].encode(), bcrypt.gensalt()).decode()
         #Creates a new user based on given input
